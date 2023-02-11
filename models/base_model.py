@@ -9,14 +9,14 @@ from datetime import datetime
 
 class BaseModel:
     """
-        Represent 'BaseModel'
+        Represent 'BaseModel' class
     """
 
     def __init__(self, *args, **kwargs):
         """
-            Initialize 'BaseModel' instance
-            Args:
-                *args (any): not used
+            Initialize new 'BaseModel' instance
+            Arguments:
+                *args (any): unused
                 **kwargs (dict): key/value pairs of attributes
         """
         tform = "%Y-%m-%dT%H:%M:%S.%f"
@@ -34,17 +34,14 @@ class BaseModel:
 
     def save(self):
         """
-            Update the public instance attribute 'updated_at'
-            with the current datetime
+            Save the model instance to the storage engine
         """
         self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
         """
-            Return: dictionary of 'BaseModel' instance
-            including key/value pair __class__ representing
-            the class name of the object.
+            Return dictionary representation of the model instance
         """
         rdict = self.__dict__.copy()
         rdict["created_at"] = self.created_at.isoformat()
@@ -54,7 +51,7 @@ class BaseModel:
 
     def __str__(self):
         """
-            Return: print/str representation of 'BaseModel' instance
+            Return string representation of the model instance
         """
         clname = self.__class__.__name__
         return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
